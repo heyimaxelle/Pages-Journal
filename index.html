@@ -1,254 +1,91 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Pages — Your Journal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,400;1,400&family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&family=DM+Sans:wght@300;400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }:root {
-–bg: #faf9f7;
-–surface: #f2efea;
-–border: #e0dbd4;
-–border2: #ccc6be;
-–text: #1a1814;
-–text2: #6a6460;
-–text3: #a8a098;
-–accent: #1a1814;
-–accent-fg: #faf9f7;
-–font-display: ‘Playfair Display’, serif;
-–font-body: ‘Lora’, serif;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#faf9f7;--surface:#f2efea;--border:#e0dbd4;--border2:#ccc6be;
+  --text:#1a1814;--text2:#6a6460;--text3:#a8a098;
+  --accent:#1a1814;--accent-fg:#faf9f7;
+  --font-display:'Playfair Display',serif;--font-body:'Lora',serif;
 }
-body {
-background: var(–bg);
-color: var(–text);
-font-family: var(–font-body);
-min-height: 100vh;
-transition: background 0.4s, color 0.4s;
-}
-.screen { display: none; opacity: 0; transition: opacity 0.25s ease; }
-.screen.active { display: block; }
-.screen.visible { opacity: 1; }
-.container { max-width: 640px; margin: 0 auto; padding: 0 24px 100px; }
-.header {
-padding: 44px 0 28px;
-border-bottom: 1px solid var(–border);
-margin-bottom: 40px;
-display: flex;
-justify-content: space-between;
-align-items: flex-end;
-}
-.wordmark {
-font-family: var(–font-display);
-font-size: 15px;
-letter-spacing: 0.18em;
-text-transform: uppercase;
-color: var(–text3);
-font-style: italic;
-}
-.header-right {
-display: flex;
-align-items: center;
-gap: 16px;
-}
-.username-tag {
-font-size: 13px;
-color: var(–text3);
-cursor: pointer;
-letter-spacing: 0.05em;
-font-family: var(–font-body);
-}
-.username-tag:hover { color: var(–text2); }
-.hero { font-family: var(–font-display); font-size: 40px; font-weight: 400; font-style: italic; line-height: 1.2; margin-bottom: 14px; color: var(–text); }
-.sub { font-size: 15px; color: var(–text2); line-height: 1.8; margin-bottom: 48px; font-family: var(–font-body); }
-input[type=text], textarea {
-width: 100%;
-background: transparent;
-border: none;
-outline: none;
-color: var(–text);
-font-family: var(–font-body);
-}
-.name-input {
-padding: 14px 0;
-font-size: 22px;
-border-bottom: 1px solid var(–border2);
-font-style: italic;
-margin-bottom: 32px;
-}
-.name-input::placeholder { color: var(–text3); }
-.write-title {
-padding: 10px 0;
-font-size: 24px;
-border-bottom: 1px solid var(–border);
-font-style: italic;
-margin-bottom: 24px;
-font-family: var(–font-display);
-}
-.write-title::placeholder { color: var(–text3); }
-.write-body {
-min-height: 260px;
-font-size: 16px;
-line-height: 1.95;
-resize: none;
-margin-bottom: 32px;
-}
-.write-body::placeholder { color: var(–text3); }
-.btn {
-background: var(–accent);
-color: var(–accent-fg);
-border: none;
-padding: 14px 30px;
-font-size: 12px;
-letter-spacing: 0.14em;
-text-transform: uppercase;
-cursor: pointer;
-font-family: var(–font-body);
-transition: opacity 0.15s;
-}
-.btn:hover { opacity: 0.82; }
-.btn-ghost {
-background: transparent;
-color: var(–text2);
-border: 1px solid var(–border2);
-padding: 12px 24px;
-font-size: 12px;
-letter-spacing: 0.12em;
-text-transform: uppercase;
-cursor: pointer;
-font-family: var(–font-body);
-transition: border-color 0.15s;
-}
-.btn-ghost:hover { border-color: var(–text2); }
-.btn-danger {
-background: transparent;
-color: #c0614a;
-border: 1px solid #e8c4bb;
-padding: 12px 24px;
-font-size: 12px;
-letter-spacing: 0.12em;
-text-transform: uppercase;
-cursor: pointer;
-font-family: var(–font-body);
-}
-.btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
-.section-label {
-font-size: 11px;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(–text3);
-margin-bottom: 14px;
-font-family: var(–font-body);
-}
-.back-btn {
-font-size: 13px;
-color: var(–text3);
-cursor: pointer;
-letter-spacing: 0.08em;
-margin-bottom: 32px;
-display: inline-block;
-font-family: var(–font-body);
-}
-.back-btn:hover { color: var(–text2); }
-.mood-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
-.mood-chip {
-padding: 8px 14px;
-font-size: 13px;
-border: 1px solid var(–border2);
-background: transparent;
-color: var(–text2);
-cursor: pointer;
-font-family: var(–font-body);
-letter-spacing: 0.04em;
-transition: all 0.15s;
-display: flex;
-align-items: center;
-gap: 6px;
-}
-.mood-chip.selected { background: var(–accent); color: var(–accent-fg); border-color: var(–accent); }
-.prompt-box {
-background: var(–surface);
-padding: 16px 20px;
-margin-bottom: 24px;
-border-left: 2px solid var(–border2);
-}
-.prompt-text { font-size: 14px; color: var(–text2); font-style: italic; line-height: 1.7; font-family: var(–font-body); }
-.entry-card {
-padding: 24px 0;
-border-bottom: 1px solid var(–border);
-cursor: pointer;
-transition: opacity 0.15s;
-}
-.entry-card:hover { opacity: 0.72; }
-.entry-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-.entry-date { font-size: 11px; color: var(–text3); letter-spacing: 0.1em; text-transform: uppercase; }
-.entry-title { font-family: var(–font-display); font-size: 18px; font-style: italic; margin-bottom: 6px; color: var(–text); font-weight: 400; }
-.entry-preview { font-size: 14px; color: var(–text2); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.entry-full-title { font-family: var(–font-display); font-size: 30px; font-style: italic; font-weight: 400; margin-bottom: 8px; }
-.entry-full-meta { font-size: 13px; color: var(–text3); margin-bottom: 32px; letter-spacing: 0.05em; }
-.entry-body { font-size: 16px; line-height: 1.95; color: var(–text); white-space: pre-wrap; margin-bottom: 40px; font-family: var(–font-body); }
-.empty-state { padding-top: 72px; text-align: center; color: var(–text3); font-size: 15px; font-style: italic; line-height: 2; font-family: var(–font-display); }
-.settings-section { margin-bottom: 40px; }
-.theme-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 8px; }
-.theme-swatch {
-aspect-ratio: 3/2;
-border-radius: 2px;
-cursor: pointer;
-border: 2px solid transparent;
-transition: border-color 0.15s;
-display: flex;
-align-items: flex-end;
-padding: 8px;
-font-size: 11px;
-letter-spacing: 0.1em;
-text-transform: uppercase;
-font-family: var(–font-body);
-}
-.theme-swatch.active { border-color: var(–text); }
-.font-options { display: flex; flex-direction: column; gap: 10px; }
-.font-option {
-padding: 14px 18px;
-border: 1px solid var(–border);
-cursor: pointer;
-transition: border-color 0.15s, background 0.15s;
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-.font-option:hover { border-color: var(–border2); }
-.font-option.active { border-color: var(–text); background: var(–surface); }
-.font-option-name { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(–text2); font-family: var(–font-body); }
-.font-option-preview { font-size: 18px; color: var(–text); }
-.greeting { font-size: 20px; font-style: italic; color: var(–text2); margin-bottom: 32px; font-family: var(–font-display); font-weight: 400; }
-.settings-icon {
-cursor: pointer;
-color: var(–text3);
-font-size: 16px;
-padding: 4px;
-transition: color 0.15s;
-}
-.settings-icon:hover { color: var(–text2); }
-@media (max-width: 480px) {
-.hero { font-size: 30px; }
-.theme-grid { grid-template-columns: repeat(2, 1fr); }
-}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);min-height:100vh;transition:background 0.3s,color 0.3s}
+.screen{display:none;opacity:0;transition:opacity 0.2s ease}
+.screen.active{display:block}
+.screen.visible{opacity:1}
+.container{max-width:640px;margin:0 auto;padding:0 24px 100px}
+.header{padding:44px 0 28px;border-bottom:1px solid var(--border);margin-bottom:40px;display:flex;justify-content:space-between;align-items:flex-end}
+.wordmark{font-family:var(--font-display);font-size:15px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text3);font-style:italic}
+.header-right{display:flex;align-items:center;gap:16px}
+.username-tag{font-size:13px;color:var(--text3);cursor:pointer;letter-spacing:0.05em;font-family:var(--font-body);background:none;border:none;padding:0}
+.settings-btn{background:none;border:none;cursor:pointer;color:var(--text3);font-size:18px;padding:4px;line-height:1}
+.hero{font-family:var(--font-display);font-size:40px;font-weight:400;font-style:italic;line-height:1.2;margin-bottom:14px;color:var(--text)}
+.sub{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:48px;font-family:var(--font-body)}
+input[type=text],textarea{width:100%;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--font-body)}
+.name-input{padding:14px 0;font-size:22px;border-bottom:1px solid var(--border2);font-style:italic;margin-bottom:32px}
+.name-input::placeholder{color:var(--text3)}
+.write-title{padding:10px 0;font-size:24px;border-bottom:1px solid var(--border);font-style:italic;margin-bottom:24px;font-family:var(--font-display)}
+.write-title::placeholder{color:var(--text3)}
+.write-body{min-height:260px;font-size:16px;line-height:1.95;resize:none;margin-bottom:32px}
+.write-body::placeholder{color:var(--text3)}
+.btn{background:var(--accent);color:var(--accent-fg);border:none;padding:14px 30px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;font-family:var(--font-body)}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border2);padding:12px 24px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;font-family:var(--font-body)}
+.btn-danger{background:transparent;color:#c0614a;border:1px solid #e8c4bb;padding:12px 24px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;font-family:var(--font-body)}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px}
+.section-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;font-family:var(--font-body)}
+.back-btn{font-size:13px;color:var(--text3);cursor:pointer;letter-spacing:0.08em;margin-bottom:32px;display:inline-block;font-family:var(--font-body);background:none;border:none;padding:0}
+.mood-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.mood-chip{padding:8px 14px;font-size:13px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-family:var(--font-body);letter-spacing:0.04em;display:flex;align-items:center;gap:6px}
+.mood-chip.selected{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.prompt-box{background:var(--surface);padding:16px 20px;margin-bottom:24px;border-left:2px solid var(--border2)}
+.prompt-text{font-size:14px;color:var(--text2);font-style:italic;line-height:1.7;font-family:var(--font-body)}
+.entry-card{padding:24px 0;border-bottom:1px solid var(--border);cursor:pointer;width:100%;background:none;border-left:none;border-right:none;border-top:none;text-align:left}
+.entry-meta{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.entry-date{font-size:11px;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase}
+.entry-title{font-family:var(--font-display);font-size:18px;font-style:italic;margin-bottom:6px;color:var(--text);font-weight:400}
+.entry-preview{font-size:14px;color:var(--text2);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.entry-full-title{font-family:var(--font-display);font-size:30px;font-style:italic;font-weight:400;margin-bottom:8px}
+.entry-full-meta{font-size:13px;color:var(--text3);margin-bottom:32px;letter-spacing:0.05em}
+.entry-body{font-size:16px;line-height:1.95;color:var(--text);white-space:pre-wrap;margin-bottom:40px;font-family:var(--font-body)}
+.empty-state{padding-top:72px;text-align:center;color:var(--text3);font-size:15px;font-style:italic;line-height:2;font-family:var(--font-display)}
+.settings-section{margin-bottom:40px}
+.theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:8px}
+.theme-swatch{aspect-ratio:3/2;border-radius:2px;cursor:pointer;border:2px solid transparent;display:flex;align-items:flex-end;padding:8px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-family:var(--font-body);width:100%}
+.theme-swatch.active{border-color:#000 !important}
+.font-options{display:flex;flex-direction:column;gap:10px}
+.font-option{padding:14px 18px;border:1px solid var(--border);cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:transparent;width:100%;text-align:left}
+.font-option.active{border-color:var(--text);background:var(--surface)}
+.font-option-name{font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text2);font-family:var(--font-body)}
+.font-option-preview{font-size:18px;color:var(--text)}
+.greeting{font-size:20px;font-style:italic;color:var(--text2);margin-bottom:32px;font-family:var(--font-display);font-weight:400}
+.settings-title{font-family:var(--font-display);font-size:26px;font-style:italic;font-weight:400;margin-bottom:40px}
+@media(max-width:480px){.hero{font-size:30px}.theme-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
-<body><div id="screen-welcome" class="screen">
+<body>
+
+<div id="screen-welcome" class="screen">
   <div class="container">
     <div class="header"><span class="wordmark">Pages</span></div>
     <p class="hero">A place<br>just for you.</p>
     <p class="sub">Private. Personal. Yours.<br>Enter any name to begin — your entries are yours alone.</p>
-    <input type="text" class="name-input" id="name-input" placeholder="what do you want to be called?" maxlength="32" />
+    <input type="text" class="name-input" id="name-input" placeholder="what do you want to be called?" maxlength="32"/>
     <div class="btn-row"><button class="btn" onclick="handleEnter()">Open my journal</button></div>
   </div>
-</div><div id="screen-home" class="screen">
+</div>
+
+<div id="screen-home" class="screen">
   <div class="container">
     <div class="header">
       <span class="wordmark">Pages</span>
       <div class="header-right">
-        <span class="settings-icon" onclick="goTo('settings')" title="Customise">⚙</span>
-        <span class="username-tag" onclick="logout()" id="username-display" title="Change name"></span>
+        <button class="settings-btn" onclick="goTo('settings')" title="Customise">⚙</button>
+        <button class="username-tag" onclick="logout()" id="username-display" title="Change name"></button>
       </div>
     </div>
     <p class="greeting" id="home-greeting"></p>
@@ -259,15 +96,17 @@ transition: color 0.15s;
     <p class="section-label" id="entry-count"></p>
     <div id="entries-list"></div>
   </div>
-</div><div id="screen-write" class="screen">
+</div>
+
+<div id="screen-write" class="screen">
   <div class="container">
     <div class="header">
       <span class="wordmark">Pages</span>
-      <span class="username-tag" id="write-date"></span>
+      <span id="write-date" style="font-size:13px;color:var(--text3);font-family:var(--font-body)"></span>
     </div>
-    <span class="back-btn" onclick="goTo('home')">← back</span>
+    <button class="back-btn" onclick="goTo('home')">← back</button>
     <div id="prompt-display"></div>
-    <input type="text" class="write-title" id="write-title" placeholder="give this a title..." maxlength="80" />
+    <input type="text" class="write-title" id="write-title" placeholder="give this a title..." maxlength="80"/>
     <textarea class="write-body" id="write-body" placeholder="start writing..."></textarea>
     <p class="section-label">How are you feeling?</p>
     <div class="mood-row" id="mood-row"></div>
@@ -276,17 +115,21 @@ transition: color 0.15s;
       <button class="btn-ghost" onclick="goTo('home')">Discard</button>
     </div>
   </div>
-</div><div id="screen-entry" class="screen">
+</div>
+
+<div id="screen-entry" class="screen">
   <div class="container">
     <div class="header"><span class="wordmark">Pages</span></div>
-    <span class="back-btn" onclick="goTo('home')">← back</span>
+    <button class="back-btn" onclick="goTo('home')">← back</button>
     <div id="entry-view"></div>
   </div>
-</div><div id="screen-settings" class="screen">
+</div>
+
+<div id="screen-settings" class="screen">
   <div class="container">
     <div class="header"><span class="wordmark">Pages</span></div>
-    <span class="back-btn" onclick="goTo('home')">← back</span>
-    <h2 style="font-family:var(--font-display);font-size:26px;font-style:italic;font-weight:400;margin-bottom:40px;">Make it yours.</h2>
+    <button class="back-btn" onclick="goTo('home')">← back</button>
+    <h2 class="settings-title">Make it yours.</h2>
     <div class="settings-section">
       <p class="section-label">Colour theme</p>
       <div class="theme-grid" id="theme-grid"></div>
@@ -295,43 +138,242 @@ transition: color 0.15s;
       <p class="section-label">Font style</p>
       <div class="font-options" id="font-options"></div>
     </div>
-    <div class="btn-row" style="margin-top:32px;"><button class="btn" onclick="goTo('home')">Done</button></div>
+    <div class="btn-row" style="margin-top:32px">
+      <button class="btn" onclick="goTo('home')">Done</button>
+    </div>
   </div>
-</div><script>
-const MOODS=[{emoji:"🌤",label:"okay"},{emoji:"🌸",label:"good"},{emoji:"✨",label:"great"},{emoji:"🌧",label:"low"},{emoji:"🔥",label:"anxious"},{emoji:"🫧",label:"numb"},{emoji:"💛",label:"grateful"},{emoji:"🌙",label:"tired"},{emoji:"😤",label:"frustrated"},{emoji:"🌊",label:"overwhelmed"},{emoji:"🕊",label:"peaceful"},{emoji:"🫀",label:"heartbroken"}];
-const PROMPTS=["What's something small that made you smile today?","What are you carrying right now that you haven't said out loud?","Describe where you are emotionally, like a weather report.","What do you wish someone would ask you about?","What's one thing you did recently that was just for you?","If today had a color, what would it be and why?","What's something you keep almost saying but don't?","Who made you feel seen lately?","What does your body feel like right now — honestly?","What's a version of yourself you've been avoiding?","Write about something that ended and how you actually feel about it.","What would you tell yourself from six months ago?","What do you need right now that you haven't asked for?","Describe your current chapter of life in three words. Explain them.","What's something you did this week you're quietly proud of?","Who are you when no one's watching?","What are you afraid to want?","Write a letter to the feeling you've been pushing away.","What does your gut keep telling you that your head keeps ignoring?","What would change if you stopped waiting?","Describe a moment recently where you felt completely like yourself.","What's a story you keep telling about yourself that might not be true anymore?","What have you outgrown that you haven't let go of yet?","What would you do differently if no one was judging you?","Write about something beautiful you noticed today.","What's the last thing that made you tear up — and why?","If your emotions were rooms, which one have you been living in?","What's something you're still learning to forgive yourself for?","When did you last feel free? What were you doing?","What does rest actually look like for you?","Write about someone who changed you without knowing it.","What do you wish people understood about you without you having to explain it?","What version of yourself do you miss?","What are you growing toward right now, even slowly?","Name five things that are true about you right now, in this moment."];
-const THEMES=[{id:"warm",name:"Warm",bg:"#faf9f7",surface:"#f2efea",border:"#e0dbd4",border2:"#ccc6be",text:"#1a1814",text2:"#6a6460",text3:"#a8a098",accent:"#1a1814",accentFg:"#faf9f7",swatchBg:"#faf9f7",swatchColor:"#1a1814"},{id:"sage",name:"Sage",bg:"#f5f7f4",surface:"#ebede8",border:"#d6dbd2",border2:"#b8c0b2",text:"#1e2419",text2:"#5a6355",text3:"#96a090",accent:"#2d3d28",accentFg:"#f5f7f4",swatchBg:"#e8ede4",swatchColor:"#2d3d28"},{id:"dusk",name:"Dusk",bg:"#f7f5f9",surface:"#eeebf2",border:"#ddd8e4",border2:"#c4bcce",text:"#1c1820",text2:"#635d6a",text3:"#9d97a6",accent:"#2e2438",accentFg:"#f7f5f9",swatchBg:"#e8e3f0",swatchColor:"#2e2438"},{id:"sand",name:"Sand",bg:"#fdf8f2",surface:"#f5eddf",border:"#e5d9c8",border2:"#d0c0a8",text:"#221a10",text2:"#6e5c44",text3:"#a89278",accent:"#221a10",accentFg:"#fdf8f2",swatchBg:"#f0e4d0",swatchColor:"#221a10"},{id:"midnight",name:"Midnight",bg:"#111217",surface:"#1c1e24",border:"#2a2d36",border2:"#3a3e4a",text:"#e8e6e2",text2:"#9e9c98",text3:"#6a6866",accent:"#e8e6e2",accentFg:"#111217",swatchBg:"#1c1e24",swatchColor:"#e8e6e2"},{id:"blush",name:"Blush",bg:"#fdf5f5",surface:"#f5e8e8",border:"#e8d4d4",border2:"#d4b8b8",text:"#221414",text2:"#6e4848",text3:"#a88080",accent:"#221414",accentFg:"#fdf5f5",swatchBg:"#f0d8d8",swatchColor:"#221414"}];
-const FONTS=[{id:"playfair",name:"Playfair",display:"'Playfair Display', serif",body:"'Lora', serif",preview:"Aa"},{id:"cormorant",name:"Cormorant",display:"'Cormorant Garamond', serif",body:"'Cormorant Garamond', serif",preview:"Aa"},{id:"dm-serif",name:"DM Serif",display:"'DM Serif Display', serif",body:"'Lora', serif",preview:"Aa"},{id:"modern",name:"Modern",display:"'Jost', sans-serif",body:"'DM Sans', sans-serif",preview:"Aa"},{id:"minimal",name:"Minimal",display:"'Inter', sans-serif",body:"'Inter', sans-serif",preview:"Aa"}];
-let state={screen:"welcome",username:"",entries:[],draft:{title:"",body:"",mood:null,prompt:null},selectedMood:null,theme:"warm",font:"playfair"};
-function storageKey(n){return"pages_journal_"+n.toLowerCase().trim()}
-function settingsKey(){return"pages_settings"}
-function saveSettings(){localStorage.setItem(settingsKey(),JSON.stringify({theme:state.theme,font:state.font}))}
-function loadSettings(){try{const s=JSON.parse(localStorage.getItem(settingsKey()));if(s){state.theme=s.theme||"warm";state.font=s.font||"playfair"}}catch{}applyTheme(state.theme);applyFont(state.font)}
-function applyTheme(id){const t=THEMES.find(t=>t.id===id)||THEMES[0];const r=document.documentElement.style;r.setProperty("--bg",t.bg);r.setProperty("--surface",t.surface);r.setProperty("--border",t.border);r.setProperty("--border2",t.border2);r.setProperty("--text",t.text);r.setProperty("--text2",t.text2);r.setProperty("--text3",t.text3);r.setProperty("--accent",t.accent);r.setProperty("--accent-fg",t.accentFg);state.theme=id}
-function applyFont(id){const f=FONTS.find(f=>f.id===id)||FONTS[0];document.documentElement.style.setProperty("--font-display",f.display);document.documentElement.style.setProperty("--font-body",f.body);state.font=id}
-function goTo(screen){const current=document.querySelector(".screen.active");if(current){current.classList.remove("visible");setTimeout(()=>{current.classList.remove("active")},200)}setTimeout(()=>{state.screen=screen;const next=document.getElementById("screen-"+screen);if(!next)return;next.classList.add("active");if(screen==="home")renderHome();if(screen==="settings")renderSettings();if(screen==="write")renderWrite();requestAnimationFrame(()=>requestAnimationFrame(()=>next.classList.add("visible")))},220)}
-function handleEnter(){const name=document.getElementById("name-input").value.trim();if(!name)return;state.username=name;localStorage.setItem("pages_username",name);loadEntries();goTo("home")}
+</div>
+
+<script>
+const MOODS=[
+  {emoji:"🌤",label:"okay"},{emoji:"🌸",label:"good"},{emoji:"✨",label:"great"},
+  {emoji:"🌧",label:"low"},{emoji:"🔥",label:"anxious"},{emoji:"🫧",label:"numb"},
+  {emoji:"💛",label:"grateful"},{emoji:"🌙",label:"tired"},{emoji:"😤",label:"frustrated"},
+  {emoji:"🌊",label:"overwhelmed"},{emoji:"🕊",label:"peaceful"},{emoji:"🫀",label:"heartbroken"}
+];
+
+const PROMPTS=[
+  "What's something small that made you smile today?",
+  "What are you carrying right now that you haven't said out loud?",
+  "Describe where you are emotionally, like a weather report.",
+  "What do you wish someone would ask you about?",
+  "What's one thing you did recently that was just for you?",
+  "If today had a color, what would it be and why?",
+  "What's something you keep almost saying but don't?",
+  "Who made you feel seen lately?",
+  "What does your body feel like right now — honestly?",
+  "What's a version of yourself you've been avoiding?",
+  "Write about something that ended and how you actually feel about it.",
+  "What would you tell yourself from six months ago?",
+  "What do you need right now that you haven't asked for?",
+  "Describe your current chapter of life in three words. Explain them.",
+  "What's something you did this week you're quietly proud of?",
+  "Who are you when no one's watching?",
+  "What are you afraid to want?",
+  "Write a letter to the feeling you've been pushing away.",
+  "What does your gut keep telling you that your head keeps ignoring?",
+  "What would change if you stopped waiting?",
+  "Describe a moment recently where you felt completely like yourself.",
+  "What's a story you keep telling about yourself that might not be true anymore?",
+  "What have you outgrown that you haven't let go of yet?",
+  "What would you do differently if no one was judging you?",
+  "Write about something beautiful you noticed today.",
+  "What's the last thing that made you tear up — and why?",
+  "If your emotions were rooms, which one have you been living in?",
+  "What's something you're still learning to forgive yourself for?",
+  "When did you last feel free? What were you doing?",
+  "What does rest actually look like for you?",
+  "Write about someone who changed you without knowing it.",
+  "What do you wish people understood about you without you having to explain it?",
+  "What version of yourself do you miss?",
+  "What are you growing toward right now, even slowly?",
+  "Name five things that are true about you right now, in this moment."
+];
+
+const THEMES=[
+  {id:"warm",name:"Warm",bg:"#faf9f7",surface:"#f2efea",border:"#e0dbd4",border2:"#ccc6be",text:"#1a1814",text2:"#6a6460",text3:"#a8a098",accent:"#1a1814",accentFg:"#faf9f7",swatchBg:"#e8e4de",swatchColor:"#1a1814"},
+  {id:"sage",name:"Sage",bg:"#f5f7f4",surface:"#ebede8",border:"#d6dbd2",border2:"#b8c0b2",text:"#1e2419",text2:"#5a6355",text3:"#96a090",accent:"#2d3d28",accentFg:"#f5f7f4",swatchBg:"#c8d4c0",swatchColor:"#1e2419"},
+  {id:"dusk",name:"Dusk",bg:"#f7f5f9",surface:"#eeebf2",border:"#ddd8e4",border2:"#c4bcce",text:"#1c1820",text2:"#635d6a",text3:"#9d97a6",accent:"#2e2438",accentFg:"#f7f5f9",swatchBg:"#c8bcd8",swatchColor:"#1c1820"},
+  {id:"sand",name:"Sand",bg:"#fdf8f2",surface:"#f5eddf",border:"#e5d9c8",border2:"#d0c0a8",text:"#221a10",text2:"#6e5c44",text3:"#a89278",accent:"#221a10",accentFg:"#fdf8f2",swatchBg:"#dfc9a8",swatchColor:"#221a10"},
+  {id:"midnight",name:"Midnight",bg:"#111217",surface:"#1c1e24",border:"#2a2d36",border2:"#3a3e4a",text:"#e8e6e2",text2:"#9e9c98",text3:"#6a6866",accent:"#e8e6e2",accentFg:"#111217",swatchBg:"#1c1e24",swatchColor:"#e8e6e2"},
+  {id:"blush",name:"Blush",bg:"#fdf5f5",surface:"#f5e8e8",border:"#e8d4d4",border2:"#d4b8b8",text:"#221414",text2:"#6e4848",text3:"#a88080",accent:"#221414",accentFg:"#fdf5f5",swatchBg:"#e8c0c0",swatchColor:"#221414"}
+];
+
+const FONTS=[
+  {id:"playfair",name:"Playfair",display:"'Playfair Display',serif",body:"'Lora',serif"},
+  {id:"cormorant",name:"Cormorant",display:"'Cormorant Garamond',serif",body:"'Cormorant Garamond',serif"},
+  {id:"dm",name:"DM Serif",display:"'DM Serif Display',serif",body:"'Lora',serif"},
+  {id:"modern",name:"Modern",display:"'Jost',sans-serif",body:"'DM Sans',sans-serif"},
+  {id:"minimal",name:"Minimal",display:"'Inter',sans-serif",body:"'Inter',sans-serif"}
+];
+
+let state={username:"",entries:[],draft:{},selectedMood:null,theme:"warm",font:"playfair"};
+
+function sk(n){return"pages_v2_"+n.toLowerCase().trim()}
+function loadSettings(){
+  try{const s=JSON.parse(localStorage.getItem("pages_settings_v2")||"{}");
+    state.theme=s.theme||"warm";state.font=s.font||"playfair";
+  }catch{}
+  applyTheme(state.theme);applyFont(state.font);
+}
+function saveSettings(){localStorage.setItem("pages_settings_v2",JSON.stringify({theme:state.theme,font:state.font}))}
+
+function applyTheme(id){
+  const t=THEMES.find(x=>x.id===id)||THEMES[0];
+  const r=document.documentElement.style;
+  r.setProperty("--bg",t.bg);r.setProperty("--surface",t.surface);
+  r.setProperty("--border",t.border);r.setProperty("--border2",t.border2);
+  r.setProperty("--text",t.text);r.setProperty("--text2",t.text2);r.setProperty("--text3",t.text3);
+  r.setProperty("--accent",t.accent);r.setProperty("--accent-fg",t.accentFg);
+  document.body.style.setProperty("background",t.bg,"important");
+  document.body.style.setProperty("color",t.text,"important");
+  state.theme=id;
+}
+
+function applyFont(id){
+  const f=FONTS.find(x=>x.id===id)||FONTS[0];
+  document.documentElement.style.setProperty("--font-display",f.display);
+  document.documentElement.style.setProperty("--font-body",f.body);
+  document.body.style.fontFamily=f.body;
+  state.font=id;
+}
+
+function goTo(screen){
+  document.querySelectorAll(".screen").forEach(s=>{s.classList.remove("visible");setTimeout(()=>s.classList.remove("active"),200)});
+  setTimeout(()=>{
+    const el=document.getElementById("screen-"+screen);
+    if(!el)return;
+    el.classList.add("active");
+    if(screen==="home")renderHome();
+    else if(screen==="settings")renderSettings();
+    else if(screen==="write")renderWrite();
+    requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add("visible")));
+  },220);
+}
+
+function handleEnter(){
+  const name=document.getElementById("name-input").value.trim();
+  if(!name)return;
+  state.username=name;
+  localStorage.setItem("pages_user",name);
+  loadEntries();
+  goTo("home");
+}
 document.getElementById("name-input").addEventListener("keydown",e=>{if(e.key==="Enter")handleEnter()});
-function loadEntries(){try{const raw=localStorage.getItem(storageKey(state.username));state.entries=raw?JSON.parse(raw):[]}catch{state.entries=[]}}
-function persistEntries(){localStorage.setItem(storageKey(state.username),JSON.stringify(state.entries))}
-function logout(){localStorage.removeItem("pages_username");state.username="";state.entries=[];document.getElementById("name-input").value="";goTo("welcome")}
-function formatDate(iso){return new Date(iso).toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"})}
-function formatTime(iso){return new Date(iso).toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"})}
-function renderHome(){document.getElementById("username-display").textContent=state.username+" ↩";document.getElementById("home-greeting").textContent=getGreeting()+", "+state.username+".";const count=state.entries.length;document.getElementById("entry-count").textContent=count===0?"":count+(count===1?" entry":" entries");const list=document.getElementById("entries-list");if(count===0){list.innerHTML='<div class="empty-state"><p>Nothing here yet.</p><p>Your first entry is waiting.</p></div>';return}list.innerHTML=state.entries.map((e,i)=>`<div class="entry-card" onclick="openEntry(${i})"><div class="entry-meta"><span class="entry-date">${formatDate(e.date)}</span>${e.mood?`<span>${e.mood.emoji}</span>`:""}</div><div class="entry-title">${escHtml(e.title)}</div><div class="entry-preview">${escHtml(e.body)}</div></div>`).join("")}
-function getGreeting(){const h=new Date().getHours();if(h<12)return"Good morning";if(h<17)return"Good afternoon";return"Good evening"}
-function openWrite(withPrompt){const prompt=withPrompt?PROMPTS[Math.floor(Math.random()*PROMPTS.length)]:null;state.draft={title:"",body:"",mood:null,prompt};state.selectedMood=null;goTo("write")}
-function renderWrite(){document.getElementById("write-date").textContent=formatDate(new Date().toISOString());document.getElementById("write-title").value="";const body=document.getElementById("write-body");body.value="";const pd=document.getElementById("prompt-display");if(state.draft.prompt){pd.innerHTML=`<div class="prompt-box"><p class="prompt-text">"${escHtml(state.draft.prompt)}"</p></div>`}else{pd.innerHTML=""}const mr=document.getElementById("mood-row");mr.innerHTML=MOODS.map(m=>`<button class="mood-chip" id="mood-${m.label}" onclick="selectMood('${m.label}')">${m.emoji} ${m.label}</button>`).join("");setTimeout(()=>body.focus(),100)}
-function selectMood(label){if(state.selectedMood===label){state.selectedMood=null}else{state.selectedMood=label}document.querySelectorAll(".mood-chip").forEach(el=>el.classList.remove("selected"));if(state.selectedMood){const el=document.getElementById("mood-"+state.selectedMood);if(el)el.classList.add("selected")}}
-function saveEntry(){const title=document.getElementById("write-title").value.trim();const body=document.getElementById("write-body").value.trim();if(!body)return;const mood=state.selectedMood?MOODS.find(m=>m.label===state.selectedMood):null;const entry={id:Date.now(),title:title||"Untitled",body,mood,prompt:state.draft.prompt,date:new Date().toISOString()};state.entries.unshift(entry);persistEntries();goTo("home")}
-function openEntry(index){state.selectedEntryIndex=index;const e=state.entries[index];const view=document.getElementById("entry-view");view.innerHTML=`<h1 class="entry-full-title">${escHtml(e.title)}</h1><p class="entry-full-meta">${formatDate(e.date)} · ${formatTime(e.date)}${e.mood?" · "+e.mood.emoji+" "+e.mood.label:""}</p>${e.prompt?`<div class="prompt-box"><p class="prompt-text">"${escHtml(e.prompt)}"</p></div>`:""}<p class="entry-body">${escHtml(e.body)}</p><button class="btn-danger" onclick="deleteEntry(${index})">Delete this entry</button>`;goTo("entry")}
-function deleteEntry(index){if(!confirm("Delete this entry? This can't be undone."))return;state.entries.splice(index,1);persistEntries();goTo("home")}
-function renderSettings(){const tg=document.getElementById("theme-grid");tg.innerHTML=THEMES.map(t=>`<div class="theme-swatch ${state.theme===t.id?"active":""}" style="background:${t.swatchBg};color:${t.swatchColor};" onclick="selectTheme('${t.id}')">${t.name}</div>`).join("");const fo=document.getElementById("font-options");fo.innerHTML=FONTS.map(f=>`<div class="font-option ${state.font===f.id?"active":""}" onclick="selectFont('${f.id}')"><span class="font-option-name">${f.name}</span><span class="font-option-preview" style="font-family:${f.display}">${f.preview} — The way you write matters.</span></div>`).join("")}
-function applyTheme(id){const t=THEMES.find(t=>t.id===id)||THEMES[0];const r=document.documentElement.style;r.setProperty("--bg",t.bg);r.setProperty("--surface",t.surface);r.setProperty("--border",t.border);r.setProperty("--border2",t.border2);r.setProperty("--text",t.text);r.setProperty("--text2",t.text2);r.setProperty("--text3",t.text3);r.setProperty("--accent",t.accent);r.setProperty("--accent-fg",t.accentFg);document.body.style.background=t.bg;document.body.style.color=t.text;state.theme=id}
-function applyTheme(id){const t=THEMES.find(t=>t.id===id)||THEMES[0];const r=document.documentElement.style;r.setProperty("--bg",t.bg);r.setProperty("--surface",t.surface);r.setProperty("--border",t.border);r.setProperty("--border2",t.border2);r.setProperty("--text",t.text);r.setProperty("--text2",t.text2);r.setProperty("--text3",t.text3);r.setProperty("--accent",t.accent);r.setProperty("--accent-fg",t.accentFg);document.body.style.background=t.bg;document.body.style.color=t.text;state.theme=id}
-function selectFont(id){applyFont(id);saveSettings();renderSettings()}
-function escHtml(str){return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+
+function loadEntries(){
+  try{state.entries=JSON.parse(localStorage.getItem(sk(state.username))||"[]")}
+  catch{state.entries=[]}
+}
+function saveEntries(){localStorage.setItem(sk(state.username),JSON.stringify(state.entries))}
+
+function logout(){
+  localStorage.removeItem("pages_user");
+  state.username="";state.entries=[];
+  document.getElementById("name-input").value="";
+  goTo("welcome");
+}
+
+function fmtDate(iso){return new Date(iso).toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"})}
+function fmtTime(iso){return new Date(iso).toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"})}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function greeting(){const h=new Date().getHours();return h<12?"Good morning":h<17?"Good afternoon":"Good evening"}
+
+function renderHome(){
+  document.getElementById("username-display").textContent=state.username+" ↩";
+  document.getElementById("home-greeting").textContent=greeting()+", "+state.username+".";
+  const n=state.entries.length;
+  document.getElementById("entry-count").textContent=n?n+(n===1?" entry":" entries"):"";
+  const list=document.getElementById("entries-list");
+  if(!n){list.innerHTML='<div class="empty-state"><p>Nothing here yet.</p><p>Your first entry is waiting.</p></div>';return}
+  list.innerHTML=state.entries.map((e,i)=>`
+    <button class="entry-card" onclick="openEntry(${i})">
+      <div class="entry-meta">
+        <span class="entry-date">${fmtDate(e.date)}</span>
+        ${e.mood?`<span>${e.mood.emoji}</span>`:""}
+      </div>
+      <div class="entry-title">${esc(e.title)}</div>
+      <div class="entry-preview">${esc(e.body)}</div>
+    </button>`).join("");
+}
+
+function openWrite(withPrompt){
+  const p=withPrompt?PROMPTS[Math.floor(Math.random()*PROMPTS.length)]:null;
+  state.draft={prompt:p};state.selectedMood=null;
+  goTo("write");
+}
+
+function renderWrite(){
+  document.getElementById("write-date").textContent=fmtDate(new Date().toISOString());
+  document.getElementById("write-title").value="";
+  document.getElementById("write-body").value="";
+  document.getElementById("prompt-display").innerHTML=state.draft.prompt
+    ?`<div class="prompt-box"><p class="prompt-text">"${esc(state.draft.prompt)}"</p></div>`:"";
+  document.getElementById("mood-row").innerHTML=MOODS.map(m=>
+    `<button class="mood-chip" id="mc-${m.label}" onclick="pickMood('${m.label}')">${m.emoji} ${m.label}</button>`
+  ).join("");
+  setTimeout(()=>document.getElementById("write-body").focus(),100);
+}
+
+function pickMood(label){
+  state.selectedMood=state.selectedMood===label?null:label;
+  document.querySelectorAll(".mood-chip").forEach(el=>el.classList.remove("selected"));
+  if(state.selectedMood){const el=document.getElementById("mc-"+state.selectedMood);if(el)el.classList.add("selected")}
+}
+
+function saveEntry(){
+  const title=document.getElementById("write-title").value.trim();
+  const body=document.getElementById("write-body").value.trim();
+  if(!body)return;
+  const mood=state.selectedMood?MOODS.find(m=>m.label===state.selectedMood):null;
+  state.entries.unshift({id:Date.now(),title:title||"Untitled",body,mood,prompt:state.draft.prompt,date:new Date().toISOString()});
+  saveEntries();goTo("home");
+}
+
+function openEntry(i){
+  const e=state.entries[i];
+  document.getElementById("entry-view").innerHTML=`
+    <h1 class="entry-full-title">${esc(e.title)}</h1>
+    <p class="entry-full-meta">${fmtDate(e.date)} · ${fmtTime(e.date)}${e.mood?" · "+e.mood.emoji+" "+e.mood.label:""}</p>
+    ${e.prompt?`<div class="prompt-box"><p class="prompt-text">"${esc(e.prompt)}"</p></div>`:""}
+    <p class="entry-body">${esc(e.body)}</p>
+    <button class="btn-danger" onclick="deleteEntry(${i})">Delete this entry</button>`;
+  goTo("entry");
+}
+
+function deleteEntry(i){
+  if(!confirm("Delete this entry? This can't be undone."))return;
+  state.entries.splice(i,1);saveEntries();goTo("home");
+}
+
+function renderSettings(){
+  document.getElementById("theme-grid").innerHTML=THEMES.map(t=>`
+    <button class="theme-swatch${state.theme===t.id?" active":""}"
+      style="background:${t.swatchBg};color:${t.swatchColor};border-color:${state.theme===t.id?t.text:"transparent"}"
+      onclick="pickTheme('${t.id}')">${t.name}</button>`).join("");
+  document.getElementById("font-options").innerHTML=FONTS.map(f=>`
+    <button class="font-option${state.font===f.id?" active":""}" onclick="pickFont('${f.id}')">
+      <span class="font-option-name">${f.name}</span>
+      <span class="font-option-preview" style="font-family:${f.display}">Aa — The way you write matters.</span>
+    </button>`).join("");
+}
+
+function pickTheme(id){applyTheme(id);saveSettings();renderSettings()}
+function pickFont(id){applyFont(id);saveSettings();renderSettings()}
+
+// Init
 loadSettings();
-const savedUser=localStorage.getItem("pages_username");
-if(savedUser){state.username=savedUser;loadEntries();const ws=document.getElementById("screen-welcome");ws.classList.add("active","visible");goTo("home")}else{const ws=document.getElementById("screen-welcome");ws.classList.add("active");requestAnimationFrame(()=>requestAnimationFrame(()=>ws.classList.add("visible")))}
-</script></body>
+const u=localStorage.getItem("pages_user");
+if(u){
+  state.username=u;loadEntries();
+  const ws=document.getElementById("screen-welcome");
+  ws.classList.add("active","visible");
+  goTo("home");
+}else{
+  const ws=document.getElementById("screen-welcome");
+  ws.classList.add("active");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>ws.classList.add("visible")));
+}
+</script>
+</body>
 </html>
