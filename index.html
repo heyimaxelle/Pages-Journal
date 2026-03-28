@@ -252,7 +252,7 @@ function goTo(screen){
 }
 
 function handleEnter(){
-  const name=document.getElementById("name-input").value.trim();
+  const name=document.getElementById("name-input").value.trim().toLowerCase();
   if(!name)return;
   state.username=name;
   localStorage.setItem("pages_user",name);
